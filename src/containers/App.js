@@ -21,6 +21,17 @@ class App extends Component {
     }));
   }
 
+  /**
+   * @desc function to remove a todo from the todos array
+   * @param string $todoToDelete
+  **/
+  handleDeleteTodo = (todoToDelete) => {
+    const newTodoList = this.state.todos.filter(todo => {
+      return todo !== todoToDelete;
+    });
+    this.setState({ todos : [...newTodoList] });
+  }
+
   render() {
     return (
       <div className="App">
