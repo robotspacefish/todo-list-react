@@ -33,13 +33,28 @@ class App extends Component {
     this.setState({ todos : [...newTodoList] });
   }
 
+  /**
+   * @desc function to remove a todo from the todos array and add to completedTodos array
+   * @param string $completedTodo
+  **/
+  handleCompletedTodo = (completedTodo) => {
+    // remove completed todo from todos
+    this.handleDeleteTodo(completedTodo);
+    // add completed todo to completed todos
+    this.setState(prevState => ({
+      completedTodos: [...prevState.completedTodos, completedTodo]
+    }));
+  };
+
   render() {
     return (
       <div className="App">
         <AddTodo handleAddTodo={this.handleAddTodo} />
         <TodoList
           todos={this.state.todos}
-          handleDeleteTodo={this.handleDeleteTodo} />
+          handleDeleteTodo={this.handleDeleteTodo}
+          handleCompletedTodo={this.handleCompletedTodo}
+        />
       </div>
     );
   }
