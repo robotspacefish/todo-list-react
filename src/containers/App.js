@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import AddTodo from '../components/AddTodo/AddTodo';
+import TodoList from '../components/TodoList/TodoList';
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class App extends Component {
     return (
       <div className="App">
         <AddTodo handleAddTodo={this.handleAddTodo} />
+        <TodoList
+          todos={this.state.todos}
+          handleDeleteTodo={this.handleDeleteTodo} />
       </div>
     );
   }
