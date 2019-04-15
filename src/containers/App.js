@@ -26,34 +26,57 @@ class App extends Component {
    * @desc function to remove a todo from the todos array
    * @param string $todoToDelete
   **/
-  handleDeleteTodo = (todoToDelete) => {
-    const newTodoList = this.state.todos.filter(todo => {
+  handleDeleteTodo = (todoToDelete, listType) => {
+    // set list type to display
+    const list = listType === 'active' ? this.state.todos : this.state.completedTodos;
+    const newTodoList = list.filter(todo => {
       return todo !== todoToDelete;
     });
-    this.setState({ todos : [...newTodoList] });
+    listType === 'active' ? this.setState({ todos: [...newTodoList] }) :
+      this.setState({ completedTodos: [...newTodoList] })
+
   }
 
   /**
    * @desc function to remove a todo from the todos array and add to completedTodos array
    * @param string $completedTodo
   **/
-  handleCompletedTodo = (completedTodo) => {
+  handleCompletedTodo = (completedTodo, listType) => {
     // remove completed todo from todos
-    this.handleDeleteTodo(completedTodo);
+    this.handleDeleteTodo(completedTodo, listType);
     // add completed todo to completed todos
-    this.setState(prevState => ({
-      completedTodos: [...prevState.completedTodos, completedTodo]
-    }));
+    if (listType ==='completed') {
+      this.handlePutBackActiveTodo(completedTodo);
+    } else {
+      this.setState(prevState => ({
+        completedTodos: [...prevState.completedTodos, completedTodo]
+      }));
+    }
   };
+
+  handlePutBackActiveTodo = (completedTodo) => {
+    console.log('putting back')
+    this.setState(prevState => ({
+      todos: [...prevState.todos, completedTodo]
+    }));
+  }
 
   render() {
     return (
       <div className="App">
         <AddTodo handleAddTodo={this.handleAddTodo} />
+
         <TodoList
           todos={this.state.todos}
           handleDeleteTodo={this.handleDeleteTodo}
           handleCompletedTodo={this.handleCompletedTodo}
+          listType="active"
+        />
+        <TodoList
+          completedTodos={this.state.completedTodos}
+          handleDeleteTodo={this.handleDeleteTodo}
+          handleCompletedTodo={this.handleCompletedTodo}
+          listType="completed"
         />
       </div>
     );

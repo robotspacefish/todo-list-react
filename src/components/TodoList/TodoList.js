@@ -1,17 +1,21 @@
 import React from 'react';
 import Todo from '../Todo/Todo';
 
-const TodoList = ({ todos, handleDeleteTodo, handleCompletedTodo }) => {
+const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo, listType }) => {
+  // set list type to display
+  const list = listType === 'active' ? todos : completedTodos;
   return (
     <div id="todo-list">
+      {listType === 'active' ? <h2>Todo List</h2> : <h2>Completed</h2>}
       {
-        todos.length>0 ? todos.map(todo =>
+        list.length>0 ? list.map(todo =>
           <Todo todo={todo}
             handleDeleteTodo={handleDeleteTodo}
             handleCompletedTodo={handleCompletedTodo}
+            listType={listType}
           />
         ) :
-        <p>You have no todos</p>
+          listType === 'active' ? <p>You have no todos</p> : <p>You have no completed todos</p>
       }
     </div>
   );
