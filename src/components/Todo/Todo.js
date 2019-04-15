@@ -1,4 +1,5 @@
 import React from 'react';
+import './Todo.css';
 
 const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
   return (
@@ -7,7 +8,7 @@ const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
 
       <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" name="complete" defaultChecked={listType === 'completed'}/>
 
-      <p className="todo-item"}>{todo}</p>
+      <p className="todo-item">{todo}</p>
       <button onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
     </div>
   );
