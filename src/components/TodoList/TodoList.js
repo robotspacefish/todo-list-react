@@ -13,6 +13,7 @@ const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo
             handleDeleteTodo={handleDeleteTodo}
             handleCompletedTodo={handleCompletedTodo}
             listType={listType}
+            key={todo}
           />
         ) :
           listType === 'active' ? <p>You have no todos</p> : <p>You have no completed todos</p>
