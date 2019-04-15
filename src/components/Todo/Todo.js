@@ -3,13 +3,13 @@ import './Todo.css';
 
 const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
   return (
-    <div className="todo">
+    <div className={`${listType}-item todo`}>
       {/* TODO outputting in an input element for future editing feature */ }
 
-      <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" name="complete" defaultChecked={listType === 'completed'}/>
+      <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" className="completed-btn" name="complete" defaultChecked={listType === 'completed'}/>
 
-      <p className="todo-item">{todo}</p>
-      <button onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
+      <p className="todo-txt">{todo}</p>
+      <button className="delete-todo-btn" onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
     </div>
   );
 }

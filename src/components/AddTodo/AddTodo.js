@@ -1,4 +1,5 @@
 import React from 'react';
+import './AddTodo.css';
 
 const AddTodo = ({ handleAddTodo }) => {
   /**
@@ -12,11 +13,12 @@ const AddTodo = ({ handleAddTodo }) => {
     e.target.add.value = '';
   }
   return (
-    <form onSubmit={onAdd}>
+    <form onSubmit={onAdd} id="add-todo-form">
       <input type="text" name="add" placeholder="add todo" />
       <button>Add</button>
     </form>
   );
 };
+
 
 export default AddTodo;

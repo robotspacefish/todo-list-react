@@ -1,0 +1,23 @@
+.todo {
+  display: flex;
+  border-bottom: 1px solid #3d1a88;
+}
+
+.todo-txt {
+  flex: 4;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.delete-todo-btn {
+  background: #790201;
+  color: white;
+  border-color: #790201;
+}
+
+.completed-btn {
+  align-self: center;
+  margin-left: 8px;
+  font-size: inherit;
+}
+

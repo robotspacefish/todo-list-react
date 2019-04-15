@@ -1,0 +1,20 @@
+#add-todo-form {
+  width: 100%;
+  display: flex;
+}
+
+#add-todo-form input {
+  flex: 8;
+  height: 1.8em;
+  font-size: inherit;
+  padding-left: 3px;
+}
+
+#add-todo-form button {
+  flex: 1;
+  align-self: center;
+  height: 100%;
+  border: none;
+  background-color: #2f1469;
+  color: white;
+}
