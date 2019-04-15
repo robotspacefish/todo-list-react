@@ -7,7 +7,7 @@ const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
 
       <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" name="complete" defaultChecked={listType === 'completed'}/>
 
-      <input type="text" value={todo} />
+      <p className="todo-item"}>{todo}</p>
       <button onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
     </div>
   );
