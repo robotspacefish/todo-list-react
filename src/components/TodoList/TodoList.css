@@ -1,0 +1,14 @@
+p { text-align: center; }
+
+.todo-list {
+  flex: 1;
+  background-color: rgba(205, 182, 255, 0.2);
+  /* padding: 0 20px; */
+  /* width: 100%; */
+  margin-top: 40px;
+}
+
+.completed-item .todo-txt {
+  text-decoration: line-through;
+  color: #bdafd9
+}

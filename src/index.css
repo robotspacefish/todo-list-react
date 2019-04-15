@@ -8,7 +8,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+#root {
+  height: 100vh;
+  width: 100vw;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6f42c1+0,6610f2+100 */
+  background: rgb(111,66,193); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(111,66,193,1) 0%, rgba(102,16,242,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(111,66,193,1) 0%,rgba(102,16,242,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(111,66,193,1) 0%,rgba(102,16,242,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6f42c1', endColorstr='#6610f2',GradientType=0 ); /* IE6-9 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
