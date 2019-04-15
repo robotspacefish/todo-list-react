@@ -5,7 +5,7 @@ const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo
   // set list type to display
   const list = listType === 'active' ? todos : completedTodos;
   return (
-    <div id="todo-list">
+    <div id={`${listType}-list`} className="todo-list">
       {listType === 'active' ? <h2>Todo List</h2> : <h2>Completed</h2>}
       {
         list.length>0 ? list.map(todo =>
