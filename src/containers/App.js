@@ -54,6 +54,10 @@ class App extends Component {
     }
   };
 
+  /**
+   * @desc function to remove a todo from the completed todos array and add to todos array
+   * @param string $completedTodo
+  **/
   handlePutBackActiveTodo = (completedTodo) => {
     console.log('putting back')
     this.setState(prevState => ({
