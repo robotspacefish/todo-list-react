@@ -1,13 +1,14 @@
 import React from 'react';
 
-const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo }) => {
+const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
   return (
     <div className="todo">
       {/* TODO outputting in an input element for future editing feature */ }
-      {/* <button className="complete-todo-btn"></button> */}
-      <input onClick={() => handleCompletedTodo(todo)} type="checkbox" name="complete" />
+
+      <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" name="complete" defaultChecked={listType === 'completed'}/>
+
       <input type="text" value={todo} />
-      <button onClick={() => handleDeleteTodo(todo)}>Delete</button>
+      <button onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
     </div>
   );
 }
