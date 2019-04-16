@@ -14,7 +14,7 @@ const AddTodo = ({ handleAddTodo }) => {
   }
   return (
     <form onSubmit={onAdd} id="add-todo-form">
-      <input type="text" name="add" placeholder="add todo" />
+      <input type="text" name="add" placeholder="add todo" required/>
       <button>Add</button>
     </form>
   );
