@@ -71,8 +71,11 @@ class App extends Component {
   }
 
   render() {
+    const totalActive = this.state.todos ? this.state.todos.length : 0;
     return (
       <div className="App">
+        <p id="active-remaining-todos">Things To Do: <span>{totalActive}</span></p>
+
         <AddTodo handleAddTodo={this.handleAddTodo} />
 
         <TodoList

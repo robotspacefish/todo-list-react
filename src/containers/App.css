@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   font-size: 16px;
-  margin-top: 60px;
+  margin-top: 40px;
   width: 100%;
   max-width: 600px;
   color: #0f0621;
@@ -16,4 +16,10 @@ button {
   cursor: pointer;
   font-size: inherit;
   font-weight: bold;
+}
+
+#active-remaining-todos {
+  margin-bottom: 50px;
+  text-align: right;
+  font-size: 1.5em;
 }
