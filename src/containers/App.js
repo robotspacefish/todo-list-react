@@ -17,6 +17,11 @@ class App extends Component {
    * @param string $input
   **/
   handleAddTodo = (input) => {
+    if (input.length < 1) {
+      return 'Todo cannot be blank';
+    } else if (this.state.todos.indexOf(input) > -1) {
+      return 'This todo already exists';
+    }
     this.setState(prevState => ({
       todos: [...prevState.todos, input]
     }));
