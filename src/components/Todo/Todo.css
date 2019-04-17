@@ -1,6 +1,7 @@
 .todo {
   display: flex;
   border-bottom: 1px solid #3d1a88;
+  overflow: hidden;
 }
 
 .todo-txt {
@@ -11,8 +12,24 @@
 
 .delete-todo-btn {
   background: #790201;
-  color: white;
-  border-color: #790201;
+  color: #bdafd9;
+  border: none;
+  display: none;
+}
+
+@keyframes slide-in {
+ from {
+   width: 0;
+ }
+ to {
+   width: 60px;
+ }
+}
+
+.todo:hover .delete-todo-btn {
+  display: block;
+  animation-name: slide-in;
+  animation-duration: 0.1s;
 }
 
 .completed-btn {
