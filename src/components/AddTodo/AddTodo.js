@@ -33,10 +33,33 @@ class AddTodo extends Component {
   }
 
   handleRating = (rating) => {
-    this.setState({ rating });
+    if (rating > 0 && rating === this.state.rating) {
+      // clear .rated class from all bangs
+      this.loopThroughBangs(1, 'remove', 5);
+      this.setState({ rating : 0 });
+    } else {
+      //set rating in state
+      this.setState({ rating });
 
-    // set bang color for rating level
+      // add .rated class to bangs <= rating
+      this.loopThroughBangs(rating, 'add', 1);
+      // clear .rated class from bangs >= rating
+      this.loopThroughBangs(rating+1, 'remove', 5);
+    }
+  }
 
+  loopThroughBangs = (initValue, condition, conditionValue) => {
+    if (condition === 'remove') {
+      for (let i = initValue; i <= conditionValue; i++) {
+        const bang = document.getElementById(`rating-${i}`);
+        bang.classList.remove('rated');
+      }
+    } else { // remove
+      for (let i = initValue; i >= conditionValue; i--) {
+        const bang = document.getElementById(`rating-${i}`);
+        bang.classList.add('rated');
+      }
+    }
   }
 
   render() {
