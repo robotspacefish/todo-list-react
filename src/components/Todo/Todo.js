@@ -2,13 +2,7 @@ import React from 'react';
 import './Todo.css';
 
 const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
-  const displayRating = () => <span>!</span>;
-
-  let exclamations = null;
-
-  for (let i = 0; i < todo.rating; i++) {
-    exclamations.push(displayRating)
-  }
+  const displayRating = (times) => '! '.repeat(times);
 
   return (
     <div className={`${listType}-item todo`}>
@@ -17,7 +11,7 @@ const Todo = ({ todo, handleDeleteTodo, handleCompletedTodo, listType}) => {
       <input onClick={() => handleCompletedTodo(todo, listType)} type="checkbox" className="completed-btn" name="complete" defaultChecked={listType === 'completed'}/>
 
       <p className="todo-txt">{todo.todo}</p>
-      {displayRating}
+      <span class="urgency-rating">{displayRating(todo.rating)}</span>
       <button className="delete-todo-btn" onClick={() => handleDeleteTodo(todo, listType)}>Delete</button>
     </div>
   );
