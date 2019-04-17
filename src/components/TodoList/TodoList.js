@@ -3,8 +3,17 @@ import Todo from '../Todo/Todo';
 import './TodoList.css';
 
 const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo, listType }) => {
+
+  /**
+   * @desc function to sort the active todos by their urgency rating
+   * @param array $todos - the array of active todos
+   * @return sorted array
+  **/
+  const sortActiveTodos = (todos) => [...todos].sort((a, b) => b.rating - a.rating);
+
   // set list type to display
-  const list = listType === 'active' ? todos : completedTodos;
+  const list = listType === 'active' ? sortActiveTodos(todos) : completedTodos;
+
   return (
     <div id={`${listType}-list`} className="todo-list">
       {
