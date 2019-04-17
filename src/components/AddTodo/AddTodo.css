@@ -1,6 +1,5 @@
 #add-todo {
   display: flex;
-  flex-direction: column;
 }
 
 #add-todo-form {
@@ -10,19 +9,20 @@
 
 #add-todo-form input {
   flex: 8;
-  height: 1.8em;
   font-size: inherit;
   padding: 8px;
   border: none;
+  width: 100%;
+  height: 100%;
 }
 
 #add-todo-form button {
   flex: 1;
-  align-self: center;
   border: none;
   background-color: #2f1469;
   color: white;
   height: 100%;
+  width: 100%;
 }
 
 .error-msg {
