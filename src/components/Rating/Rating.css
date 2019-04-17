@@ -25,3 +25,9 @@
 .is-rated {
   background-color: orange;
 }
+
+span {
+  cursor: pointer;
+  align-self: center;
+  margin: 0 3px;
+}
