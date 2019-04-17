@@ -20,21 +20,15 @@ class AddTodo extends Component {
     e.preventDefault();
 
     const input = e.target.add.value.trim();
-    let rating = this.state.enterKeyPressed ? 0 : this.state.rating;
     let error = null;
 
-    if (this.state.enterKeyPressed) {
-      this.toggleEnterKeyPressed();
-    }
+    // add todo and return error if todo was invalid
+    error = this.props.handleAddTodo(input, this.state.rating);
+    this.setState({ error });
 
-    if (input) {
-      error = this.props.handleAddTodo(input, rating);
-      this.setState({ error });
-    }
+    // clear input field
+    e.target.add.value = '';
 
-    if (!error) {
-      e.target.add.value = '';
-    }
   }
 
   handleRating = (rating) => {
@@ -56,7 +50,7 @@ class AddTodo extends Component {
       <div id="add-todo">
         <form onSubmit={this.onAdd} id="add-todo-form">
           <input onKeyPress={this.onKeyPress}
-            type="text" name="add" placeholder="add todo" required />
+            type="text" name="add" placeholder="add todo" />
           <Rating handleRating={this.handleRating} />
           {/* <button>Add</button> */}
         </form>
