@@ -23,3 +23,12 @@ button {
   text-align: right;
   font-size: 1.5em;
 }
+
+#delete-all-completed {
+  margin-bottom: -20px;
+  align-self: flex-end;
+  padding: 12px 16px;
+  border: none;
+  background: #790201;
+  color: #bdafd9;
+}

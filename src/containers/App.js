@@ -76,6 +76,11 @@ class App extends Component {
     }));
   }
 
+  /**
+   * @desc function to delete all completed todos from completedTodos array
+  **/
+  handleDeleteAllCompleted = () => this.setState( { completedTodos : [] });
+
   render() {
     const totalActive = this.state.todos ? this.state.todos.length : 0;
     return (
@@ -90,6 +95,14 @@ class App extends Component {
           handleCompletedTodo={this.handleCompletedTodo}
           listType="active"
         />
+
+        {
+          this.state.completedTodos.length > 0 &&
+            <button id="delete-all-completed"
+              onClick={this.handleDeleteAllCompleted}>Delete All Completed
+            </button>
+        }
+
         <TodoList
           completedTodos={this.state.completedTodos}
           handleDeleteTodo={this.handleDeleteTodo}
