@@ -12,7 +12,8 @@
   flex: 8;
   height: 1.8em;
   font-size: inherit;
-  padding-left: 3px;
+  padding: 8px;
+  border: none;
 }
 
 #add-todo-form button {

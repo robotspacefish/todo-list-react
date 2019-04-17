@@ -16,14 +16,20 @@ class App extends Component {
    * @desc function to add a todo from input to the todos array
    * @param string $input
   **/
-  handleAddTodo = (input) => {
+  handleAddTodo = (input, rating) => {
+    console.log(rating)
     if (input.length < 1) {
       return 'Todo cannot be blank';
     } else if (this.state.todos.indexOf(input) > -1) {
       return 'This todo already exists';
     }
+
+    const todo = {
+      todo : input,
+      rating : rating
+    }
     this.setState(prevState => ({
-      todos: [...prevState.todos, input]
+      todos: [...prevState.todos, todo]
     }));
   }
 

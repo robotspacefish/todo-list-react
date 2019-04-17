@@ -21,3 +21,13 @@
   font-size: inherit;
 }
 
+.urgency-rating {
+  font-size: 1.2em;
+  color: #2f1469;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
