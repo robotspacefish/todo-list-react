@@ -14,10 +14,10 @@ class App extends Component {
 
   /**
    * @desc function to add a todo from input to the todos array
-   * @param string $input
+   * @params string $input - the todo text entered
+   *         int $rating - the urgency rating of the todo
   **/
   handleAddTodo = (input, rating) => {
-    console.log(rating)
     if (input.length < 1) {
       return 'Todo cannot be blank';
     } else if (this.state.todos.indexOf(input) > -1) {
@@ -50,11 +50,13 @@ class App extends Component {
 
   /**
    * @desc function to remove a todo from the todos array and add to completedTodos array
-   * @param string $completedTodo
+   * @params string $completedTodo - the todo to move to the completed array
+   *         string $listType - if the type of list to push to is 'completed' or 'active'
   **/
   handleCompletedTodo = (completedTodo, listType) => {
     // remove completed todo from todos
     this.handleDeleteTodo(completedTodo, listType);
+
     // add completed todo to completed todos
     if (listType ==='completed') {
       this.handlePutBackActiveTodo(completedTodo);
