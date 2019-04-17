@@ -11,19 +11,19 @@
   background: none;
 }
 
-#rating-5 { order: -5 }
-#rating-4 { order: -4 }
+#rating-1 { order: -5 }
+#rating-2 { order: -4 }
 #rating-3 { order: -3 }
-#rating-2 { order: -2 }
-#rating-1 { order: -1 }
+#rating-4 { order: -2 }
+#rating-5 { order: -1 }
 
 #ratings .rating:hover,
 #ratings .rating:hover ~ .rating {
   color: #2f1469;
 }
 
-.is-rated {
-  background-color: orange;
+#ratings .rated {
+  color: #2f1469;
 }
 
 span {
