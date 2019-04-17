@@ -7,7 +7,7 @@ class AddTodo extends Component {
     super (props);
     this.state = {
       error : undefined,
-      rating : undefined
+      rating : 0
     }
   }
 
