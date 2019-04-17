@@ -7,8 +7,7 @@ class AddTodo extends Component {
     super (props);
     this.state = {
       error : undefined,
-      rating : undefined,
-      enterKeyPressed : false
+      rating : 0
     }
   }
 
@@ -20,35 +19,47 @@ class AddTodo extends Component {
     e.preventDefault();
 
     const input = e.target.add.value.trim();
-    let rating = this.state.enterKeyPressed ? 0 : this.state.rating;
     let error = null;
 
-    if (this.state.enterKeyPressed) {
-      this.toggleEnterKeyPressed();
-    }
+    // add todo and return error if todo was invalid
+    error = this.props.handleAddTodo(input, this.state.rating);
+    this.setState({ error });
 
-    if (input) {
-      error = this.props.handleAddTodo(input, rating);
-      this.setState({ error });
-    }
+    // clear input field
+    e.target.add.value = '';
 
-    if (!error) {
-      e.target.add.value = '';
-    }
+    // reset rating
+    this.setState({ rating : 0 });
   }
 
   handleRating = (rating) => {
-    this.setState({ rating });
-  }
+    if (rating > 0 && rating === this.state.rating) {
+      // clear .rated class from all bangs
+      this.loopThroughBangs(1, 'remove', 5);
+      this.setState({ rating : 0 });
+    } else {
+      //set rating in state
+      this.setState({ rating });
 
-  onKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.toggleEnterKeyPressed();
+      // add .rated class to bangs <= rating
+      this.loopThroughBangs(rating, 'add', 1);
+      // clear .rated class from bangs >= rating
+      this.loopThroughBangs(rating+1, 'remove', 5);
     }
   }
 
-  toggleEnterKeyPressed = () => {
-    this.setState({ enterKeyPressed: !this.state.enterKeyPressed });
+  loopThroughBangs = (initValue, condition, conditionValue) => {
+    if (condition === 'remove') {
+      for (let i = initValue; i <= conditionValue; i++) {
+        const bang = document.getElementById(`rating-${i}`);
+        bang.classList.remove('rated');
+      }
+    } else { // remove
+      for (let i = initValue; i >= conditionValue; i--) {
+        const bang = document.getElementById(`rating-${i}`);
+        bang.classList.add('rated');
+      }
+    }
   }
 
   render() {
@@ -56,9 +67,9 @@ class AddTodo extends Component {
       <div id="add-todo">
         <form onSubmit={this.onAdd} id="add-todo-form">
           <input onKeyPress={this.onKeyPress}
-            type="text" name="add" placeholder="add todo" required />
+            type="text" name="add" placeholder="add todo" />
           <Rating handleRating={this.handleRating} />
-          {/* <button>Add</button> */}
+          <button>Add</button>
         </form>
 
         {this.state.error && <p className="error-msg">{this.state.error}</p>}
