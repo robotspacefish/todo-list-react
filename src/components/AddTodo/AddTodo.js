@@ -30,6 +30,9 @@ class AddTodo extends Component {
 
     // reset rating
     this.setState({ rating : 0 });
+
+    // clear .rated class from all bangs
+    this.loopThroughBangs(1, 'remove', 5);
   }
 
   handleRating = (rating) => {
