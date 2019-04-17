@@ -61,7 +61,7 @@ class AddTodo extends Component {
           {/* <button>Add</button> */}
         </form>
 
-        {this.state.error && <p class="error-msg">{this.state.error}</p>}
+        {this.state.error && <p className="error-msg">{this.state.error}</p>}
       </div>
     );
   }
