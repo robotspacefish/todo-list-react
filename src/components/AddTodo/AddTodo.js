@@ -7,8 +7,7 @@ class AddTodo extends Component {
     super (props);
     this.state = {
       error : undefined,
-      rating : undefined,
-      enterKeyPressed : false
+      rating : undefined
     }
   }
 
@@ -29,20 +28,15 @@ class AddTodo extends Component {
     // clear input field
     e.target.add.value = '';
 
+    // reset rating
+    this.setState({ rating : 0 });
   }
 
   handleRating = (rating) => {
     this.setState({ rating });
-  }
 
-  onKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.toggleEnterKeyPressed();
-    }
-  }
+    // set bang color for rating level
 
-  toggleEnterKeyPressed = () => {
-    this.setState({ enterKeyPressed: !this.state.enterKeyPressed });
   }
 
   render() {
