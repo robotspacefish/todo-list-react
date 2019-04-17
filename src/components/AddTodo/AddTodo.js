@@ -46,7 +46,7 @@ class AddTodo extends Component {
           <input onKeyPress={this.onKeyPress}
             type="text" name="add" placeholder="add todo" />
           <Rating handleRating={this.handleRating} />
-          {/* <button>Add</button> */}
+          <button>Add</button>
         </form>
 
         {this.state.error && <p className="error-msg">{this.state.error}</p>}
