@@ -140,16 +140,6 @@ class App extends Component {
 
         <AddTodo handleAddTodo={this.handleAddTodo} />
 
-
-        {
-          this.state.active.length > 0 &&
-          <button
-            id="toggle-all-completed"
-            onClick={this.toggleAllCompleted}>
-            Toggle All {this.state.toggleCompleted ? "Active" : "Completed"}
-          </button>
-        }
-
         <TodoList
           todos={this.state.active}
           handleDeleteTodo={this.handleDeleteTodo}
