@@ -24,13 +24,19 @@ class AddTodo extends Component {
     // add todo and return error if todo was invalid
     error = this.props.handleAddTodo(input, this.state.rating);
     this.setState({ error });
+    this.clearAndReset(e);
+  }
 
+  /**
+   * @desc function to clear and reset inputm rating, and bangs
+   * @param object $e - the input dom
+  **/
+  clearAndReset = (e) => {
+    console.log(e)
     // clear input field
     e.target.add.value = '';
-
     // reset rating
-    this.setState({ rating : 0 });
-
+    this.setState({ rating: 0 });
     // clear .rated class from all bangs
     this.loopThroughBangs(1, 'remove', 5);
   }
