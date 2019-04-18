@@ -181,6 +181,11 @@ class App extends Component {
           handleCompletedTodoToggle={this.handleCompletedTodoToggle}
           listType="completed"
         />
+
+        <footer>
+          <p>This app uses local storage to save your todos in your browser</p>
+          <p> <a href="http://robotspacefish.dev/" target="_blank" rel="noopener noreferrer">robotspacefish!</a> 2019</p>
+        </footer>
       </div>
     );
   }
