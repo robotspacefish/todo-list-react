@@ -121,7 +121,7 @@ class App extends Component {
   handleDeleteAllCompleted = () => this.setState( { completed : [] });
 
   render() {
-    const totalActive = this.state.todos ? this.state.todos.length : 0;
+    const totalActive = this.state.active ? this.state.active.length : 0;
     return (
       <div className="App">
         <p id="active-remaining-todos">Things To Do: <span>{totalActive}</span></p>
