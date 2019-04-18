@@ -1,10 +1,13 @@
 #add-todo {
   display: flex;
+  flex-direction: column;
 }
 
 #add-todo-form {
   width: 100%;
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #add-todo-form input {
@@ -13,7 +16,6 @@
   padding: 8px;
   border: none;
   width: 100%;
-  height: 100%;
 }
 
 #add-todo-form button {
@@ -23,6 +25,7 @@
   color: white;
   height: 100%;
   width: 100%;
+  padding: 9px 10px;
 }
 
 .error-msg {

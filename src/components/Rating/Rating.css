@@ -1,8 +1,7 @@
 #ratings {
   display: flex;
-  padding: 0 10px;
+  padding: 5px 10px;
   background: white;
-
 }
 #ratings .rating {
   border: none;
