@@ -34,18 +34,29 @@ class App extends Component {
   }
 
   /**
-   * @desc function to remove a todo from the todos array
-   * @param string $todoToDelete
+   * @desc function to remove a todo from the array provided
+   * @param string $todoToDelete - the todo to remove
+   * @param array $list - the list to remove the todo from
+  **/
+  deleteTodo = (todoToDelete, list) => (
+    list.filter(todo => todo !== todoToDelete)
+  );
+
+  /**
+   * @desc function to handle setting the list and todo to remove
+   * @param string $todoToDelete - the todo to remove
+   * @param string listType - 'active' or 'completed'
   **/
   handleDeleteTodo = (todoToDelete, listType) => {
     // set list type to display
-    const list = listType === 'active' ? this.state.todos : this.state.completedTodos;
-    const newTodoList = list.filter(todo => {
-      return todo !== todoToDelete;
-    });
-    listType === 'active' ? this.setState({ todos: [...newTodoList] }) :
-      this.setState({ completedTodos: [...newTodoList] })
+    const list = listType === 'active'
+      ? this.state.todos : this.state.completedTodos;
 
+    const newTodoList = this.deleteTodo(todoToDelete, list);
+
+    listType === 'active'
+      ? this.setState({ todos: [...newTodoList] })
+      : this.setState({ completedTodos: [...newTodoList] });
   }
 
   /**
