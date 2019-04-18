@@ -7,8 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos : [],
-      completedTodos : []
+      active : [],
+      completed : []
     };
   }
 
@@ -18,27 +18,48 @@ class App extends Component {
    *         int $rating - the urgency rating of the todo
   **/
   handleAddTodo = (input, rating) => {
+    const error = this.checkForInvalidInput(input);
+    if (error !== undefined) {
+      return error;
+    }
+    this.addTodoToActiveState(this.setTodoParams(input, rating));
+  }
+
+  setTodoParams = (input, rating) => ({
+      todo : input,
+      rating : rating,
+      isCompleted : false,
+      key : this.createKey(input)
+    });
+
+  checkForInvalidInput = input => {
     if (input.length < 1) {
       return 'Todo cannot be blank';
-    } else if (this.state.todos.indexOf(input) > -1) {
+    } else if (this.state.active.filter(todo => todo.todo.toLowerCase() === input.toLowerCase()).length > 0) {
       return 'This todo already exists';
+    } else if (this.state.completed.filter(todo => todo.todo.toLowerCase() === input.toLowerCase()).length > 0 ) {
+      return 'This todo already exists as Completed. Uncheck it to move it up to your Active todos, or delete it and recreate it.';
     }
+  };
 
-    const todo = {
-      todo : input,
-      rating : rating
-    }
-    this.setState(prevState => ({
-      todos: [...prevState.todos, todo]
-    }));
-  }
+  addTodoToActiveState = todo => (
+    this.setState(prevState => (
+      { active : [...prevState.active, todo] }
+    ))
+  );
+
+  addTodoToCompletedState = todo => this.setState(prevState => (
+    { completed : [...prevState.completed, todo] }
+  ))
+
+  createKey = input => input.toLowerCase().split(' ').join('_');
 
   /**
    * @desc function to remove a todo from the array provided
    * @param string $todoToDelete - the todo to remove
    * @param array $list - the list to remove the todo from
   **/
-  deleteTodo = (todoToDelete, list) => (
+  filterTodoFromList = (todoToDelete, list) => (
     list.filter(todo => todo !== todoToDelete)
   );
 
@@ -48,35 +69,40 @@ class App extends Component {
    * @param string listType - 'active' or 'completed'
   **/
   handleDeleteTodo = (todoToDelete, listType) => {
-    // set list type to display
-    const list = listType === 'active'
-      ? this.state.todos : this.state.completedTodos;
-
-    const newTodoList = this.deleteTodo(todoToDelete, list);
+    const newListArray = this.filterTodoFromList(todoToDelete, this.state[listType]);
 
     listType === 'active'
-      ? this.setState({ todos: [...newTodoList] })
-      : this.setState({ completedTodos: [...newTodoList] });
+      ? this.replaceActiveArrayState(newListArray)
+      : this.replaceCompletedArrayState(newListArray);
   }
+
+  replaceActiveArrayState = (active) => (this.setState({ active }));
+
+  replaceCompletedArrayState = (completed) => (this.setState({ completed }));
 
   /**
    * @desc function to remove a todo from the todos array and add to completedTodos array
    * @params string $completedTodo - the todo to move to the completed array
    *         string $listType - if the type of list to push to is 'completed' or 'active'
   **/
-  handleCompletedTodo = (completedTodo, listType) => {
-    // remove completed todo from todos
-    this.handleDeleteTodo(completedTodo, listType);
-
-    // add completed todo to completed todos
-    if (listType ==='completed') {
-      this.handlePutBackActiveTodo(completedTodo);
+  handleCompletedTodoToggle = (todo) => {
+    this.toggleCompletedStatus(todo);
+    const listToRemoveFrom = todo.isCompleted ? 'active' : 'completed';
+    const listWithoutTodo = this.filterTodoFromList(todo, this.state[listToRemoveFrom])
+    if (listToRemoveFrom === 'active') {
+      // add todo to completed
+      this.addTodoToCompletedState(todo)
+      // replace active list
+      this.replaceActiveArrayState(listWithoutTodo);
     } else {
-      this.setState(prevState => ({
-        completedTodos: [...prevState.completedTodos, completedTodo]
-      }));
+      // add todo to active
+      this.addTodoToActiveState(todo)
+      // replace completed list
+      this.replaceCompletedArrayState(listWithoutTodo);
     }
   };
+
+  toggleCompletedStatus = (todo) => todo.isCompleted = !todo.isCompleted;
 
   /**
    * @desc function to remove a todo from the completed todos array and add to todos array
@@ -92,7 +118,7 @@ class App extends Component {
   /**
    * @desc function to delete all completed todos from completedTodos array
   **/
-  handleDeleteAllCompleted = () => this.setState( { completedTodos : [] });
+  handleDeleteAllCompleted = () => this.setState( { completed : [] });
 
   render() {
     const totalActive = this.state.todos ? this.state.todos.length : 0;
@@ -103,23 +129,23 @@ class App extends Component {
         <AddTodo handleAddTodo={this.handleAddTodo} />
 
         <TodoList
-          todos={this.state.todos}
+          todos={this.state.active}
           handleDeleteTodo={this.handleDeleteTodo}
-          handleCompletedTodo={this.handleCompletedTodo}
+          handleCompletedTodoToggle={this.handleCompletedTodoToggle}
           listType="active"
         />
 
         {
-          this.state.completedTodos.length > 0 &&
+          this.state.completed.length > 0 &&
             <button id="delete-all-completed"
               onClick={this.handleDeleteAllCompleted}>Delete All Completed
             </button>
         }
 
         <TodoList
-          completedTodos={this.state.completedTodos}
+          completedTodos={this.state.completed}
           handleDeleteTodo={this.handleDeleteTodo}
-          handleCompletedTodo={this.handleCompletedTodo}
+          handleCompletedTodoToggle={this.handleCompletedTodoToggle}
           listType="completed"
         />
       </div>
