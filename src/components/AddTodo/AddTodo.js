@@ -29,10 +29,9 @@ class AddTodo extends Component {
 
   /**
    * @desc function to clear and reset inputm rating, and bangs
-   * @param object $e - the input dom
+   * @param object $e - the input dom event
   **/
   clearAndReset = (e) => {
-    console.log(e)
     // clear input field
     e.target.add.value = '';
     // reset rating
