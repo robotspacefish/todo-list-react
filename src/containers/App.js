@@ -12,6 +12,29 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    try {
+      const active = JSON.parse(localStorage.getItem('active'));
+      const completed = JSON.parse(localStorage.getItem('completed'));
+      if (active) { this.setState(() => ({ active })) }
+
+      if (completed) { this.setState(() => ({ completed })) }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // update active state if different
+    if (prevState.active.length !== this.state.active.length) {
+      localStorage.setItem('active', JSON.stringify(this.state.active));
+    }
+    // update completed state if different
+    if (prevState.completed.length !== this.state.completed.length) {
+      localStorage.setItem('completed', JSON.stringify(this.state.completed));
+    }
+  }
+
   /**
    * @desc function to add a todo from input to the todos array
    * @params string $input - the todo text entered
