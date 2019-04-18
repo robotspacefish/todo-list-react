@@ -128,17 +128,6 @@ class App extends Component {
   toggleCompletedStatus = (todo) => todo.isCompleted = !todo.isCompleted;
 
   /**
-   * @desc function to remove a todo from the completed todos array and add to todos array
-   * @param string $completedTodo
-  **/
-  handlePutBackActiveTodo = (completedTodo) => {
-    console.log('putting back')
-    this.setState(prevState => ({
-      todos: [...prevState.todos, completedTodo]
-    }));
-  }
-
-  /**
    * @desc function to delete all completed todos from completedTodos array
   **/
   handleDeleteAllCompleted = () => this.setState( { completed : [] });
