@@ -7,8 +7,3 @@ p { text-align: center; }
   /* width: 100%; */
   margin: 40px 0;
 }
-
-.completed-item .todo-txt {
-  text-decoration: line-through;
-  color: #bdafd9
-}
