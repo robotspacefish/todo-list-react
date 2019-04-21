@@ -8,8 +8,6 @@
   flex: 4;
   text-align: left;
   padding-left: 5px;
-  text-decoration: line-through;
-  color: #bdafd9
 }
 
 .delete-todo-btn {
@@ -49,4 +47,13 @@
   justify-content: center;
   align-items: center;
   margin: 0 10px;
+}
+
+.completed-list .todo-txt {
+  text-decoration: line-through;
+}
+
+.completed-list .todo-txt,
+.completed-list .urgency-rating {
+  color: #bdafd9;
 }
