@@ -15,7 +15,7 @@ const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo
   const list = listType === 'active' ? sortActiveTodos(todos) : completedTodos;
 
   return (
-    <div className="todo-list">
+    <div className={`${listType}-list todo-list`}>
       {
         list.length>0 ? list.map(todo =>
           <Todo todo={todo}
