@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './AddTodo.css';
+import './AddTodoForm.css';
 import Rating from '../Rating/Rating';
 
-class AddTodo extends Component {
+class AddTodoForm extends Component {
   constructor (props) {
     super (props);
     this.state = {
@@ -103,4 +103,4 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo;
+export default AddTodoForm;

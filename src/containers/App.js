@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import AddTodo from '../components/AddTodo/AddTodo';
+import AddTodoForm from '../components/AddTodoForm/AddTodoForm';
 import TodoList from '../components/TodoList/TodoList';
 
 class App extends Component {
@@ -38,8 +38,8 @@ class App extends Component {
 
   /**
    * @desc function to add a todo from input to the todos array
-   * @params string $input - the todo text entered
-   *         int $rating - the urgency rating of the todo
+   * @param string $input - the todo text entered
+   * @param int $rating - the urgency rating of the todo
   **/
   addTodoFromForm = (input, rating) => {
     const error = this.checkForInvalidInput(input);
@@ -100,8 +100,8 @@ class App extends Component {
 
   /**
    * @desc function to remove a todo from the todos array and add to completedTodos array
-   * @params string $completedTodo - the todo to move to the completed array
-   *         string $listType - if the type of list to push to is 'completed' or 'active'
+   * @param string $completedTodo - the todo to move to the completed array
+   * @param string $listType - if the type of list to push to is 'completed' or 'active'
   **/
   toggleTodo = (todo) => {
     this.toggleCompletedStatus(todo);
@@ -131,7 +131,7 @@ class App extends Component {
       <div className="App">
         <p id="active-remaining-todos">Things To Do: <span>{totalActive}</span></p>
 
-        <AddTodo addTodo={this.addTodoFromForm} />
+        <AddTodoForm addTodo={this.addTodoFromForm} />
 
         <div className="App-lists">
           <TodoList
