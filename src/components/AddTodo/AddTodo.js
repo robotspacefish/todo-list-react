@@ -15,14 +15,14 @@ class AddTodo extends Component {
    * @desc function to pass input value to handleAddTodo
    * @param string $e - the input value
   **/
-  onAdd = (e) => {
+  handleAddTodo = (e) => {
     e.preventDefault();
 
     const input = e.target.add.value.trim();
     let error = null;
 
     // add todo and return error if todo was invalid
-    error = this.props.handleAddTodo(input, this.state.rating);
+    error = this.props.addTodo(input, this.state.rating);
     this.setState({ error });
     this.clearAndReset(e);
   }
@@ -73,7 +73,7 @@ class AddTodo extends Component {
   render() {
     return (
       <div id="add-todo">
-        <form onSubmit={this.onAdd} id="add-todo-form">
+        <form onSubmit={this.handleAddTodo} id="add-todo-form">
           <input onKeyPress={this.onKeyPress}
             type="text" name="add" placeholder="add todo" />
           <Rating handleRating={this.handleRating} />

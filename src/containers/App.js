@@ -40,7 +40,7 @@ class App extends Component {
    * @params string $input - the todo text entered
    *         int $rating - the urgency rating of the todo
   **/
-  handleAddTodo = (input, rating) => {
+  addTodo = (input, rating) => {
     const error = this.checkForInvalidInput(input);
     if (error !== undefined) {
       return error;
@@ -138,7 +138,7 @@ class App extends Component {
       <div className="App">
         <p id="active-remaining-todos">Things To Do: <span>{totalActive}</span></p>
 
-        <AddTodo handleAddTodo={this.handleAddTodo} />
+        <AddTodo addTodo={this.addTodo} />
 
         <TodoList
           todos={this.state.active}
