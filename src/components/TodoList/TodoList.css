@@ -2,7 +2,8 @@ p { text-align: center; }
 
 .todo-list {
   flex: 0;
-  background-color: rgba(205, 182, 255, 0.2);
+  /* background-color: rgba(205, 182, 255, 0.2); */
+  background-color:#8251DA;
   /* padding: 0 20px; */
   /* width: 100%; */
   margin: 40px 0;
