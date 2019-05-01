@@ -10,14 +10,53 @@
   padding-left: 5px;
 }
 
+.edit-todo-btn {
+  background-color: #bdafd9;
+}
+
+.edit-todo-btn:hover {
+  background-color: #A99CC2;
+}
+
 .delete-todo-btn {
   background: #790201;
   color: #bdafd9;
-  border: none;
-  display: none;
+}
+.delete-todo-btn:hover {
+  background: #6A0403;
 }
 
-@keyframes slide-in {
+.Todo-btn {
+  padding: 0 12px;
+  border: 0;
+}
+
+.Todo-edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Todo-edit-form input {
+  flex: 8;
+  font-size: inherit;
+  padding: 16px 30px;
+  border: none;
+  width: 100%;
+  background-color: white;
+}
+.Todo-edit-form button {
+  flex: 1;
+  border: none;
+  color: #2f1469;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 9px 10px;
+}
+
+/* @keyframes slide-in {
  from {
    width: 0;
  }
@@ -30,7 +69,7 @@
   display: block;
   animation-name: slide-in;
   animation-duration: 0.1s;
-}
+} */
 
 .completed-btn {
   align-self: center;

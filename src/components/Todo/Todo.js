@@ -38,34 +38,32 @@ export default class Todo extends Component {
 
   render() {
     const displayRating = (times) => '! '.repeat(times);
-    let formToRender;
+    const hide = this.state.isEditing && 'hide';
+    return (
+      <div className="todo">
+        <input className={`completed-btn ${hide}`}
+          onClick={this.handleToggle}
+          type="checkbox"
+          name="complete"
+          defaultChecked={this.props.listType === 'completed'} />
 
-    if (this.state.isEditing) {
-      formToRender = (
-        <div>
-          <form onSubmit={this.handleEdit}>
-            <input
-              type="text"
-              value={this.state.task}
-              onChange={this.handleChange} />
-            <button>Save</button>
-          </form>
-        </div>
-      );
-    } else {
-      formToRender = (
-        <div className="todo">
-          <input onClick={this.handleToggle} type="checkbox" className="completed-btn" name="complete" defaultChecked={this.props.listType === 'completed'} />
+        {
+          this.state.isEditing
+            ? <form className="Todo-edit-form" onSubmit={this.handleEdit}>
+              <input
+                type="text"
+                value={this.state.task}
+                onChange={this.handleChange} />
+              <button>Save</button>
+            </form>
+            : <p className="todo-txt">{this.state.task}</p>
+        }
 
-          <p className="todo-txt">{this.state.task}</p>
-
-          <span className="urgency-rating">{displayRating(this.props.todo.rating)}</span>
-          <button className="edit-todo-btn" onClick={this.toggleEditForm}><i className="fas fa-pencil-alt"></i></button>
-          <button className="delete-todo-btn" onClick={this.handleDelete}><i className="far fa-trash-alt"></i></button>
-        </div>
-      );
-    }
-    return formToRender;
+        <span className={`urgency-rating ${hide}`}>{displayRating(this.props.todo.rating)}</span>
+        <button className={`edit-todo-btn Todo-btn ${hide}`} onClick={this.toggleEditForm}><i className="fas fa-pencil-alt"></i></button>
+        <button className={`delete-todo-btn Todo-btn ${hide}`} onClick={this.handleDelete}><i className="far fa-trash-alt"></i></button>
+      </div>
+    );
   }
 }
 
