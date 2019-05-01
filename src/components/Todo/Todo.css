@@ -14,10 +14,10 @@
   background: #790201;
   color: #bdafd9;
   border: none;
-  display: none;
+  /* display: none; */
 }
 
-@keyframes slide-in {
+/* @keyframes slide-in {
  from {
    width: 0;
  }
@@ -30,7 +30,7 @@
   display: block;
   animation-name: slide-in;
   animation-duration: 0.1s;
-}
+} */
 
 .completed-btn {
   align-self: center;
