@@ -60,13 +60,14 @@ class App extends Component {
    * @param string $listType - the list that contains the todo (active or completed)
   **/
   updateTodo (id, updatedTodo, listType) {
+
     const updatedList = this.state[listType].map(task => {
       if (id === task.id) {
-        return {...task, todo : updatedTodo, key : this.createKey(updatedTodo)};
+        return {...task, todo : updatedTodo, id : this.createKey(updatedTodo)};
       }
       return task;
     });
-
+    console.log(updatedList)
     this.setState({ [listType] : updatedList });
   }
 
