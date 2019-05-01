@@ -7,15 +7,19 @@ class AddTodo extends Component {
     super (props);
     this.state = {
       error : undefined,
-      rating : 0
+      rating : 0,
+      task : ''
     }
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRating = this.handleRating.bind(this);
   }
 
   /**
-   * @desc function to pass input value to handleAddTodo
+   * @desc function to pass input value to addTodo
    * @param string $e - the input value
   **/
-  handleAddTodo = (e) => {
+  handleAddTodo (e) {
     e.preventDefault();
 
     const input = e.target.add.value.trim();
@@ -27,11 +31,15 @@ class AddTodo extends Component {
     this.clearAndReset(e);
   }
 
+  handleChange(e) {
+    this.setState({ task: e.target.value });
+  }
+
   /**
-   * @desc function to clear and reset inputm rating, and bangs
+   * @desc function to clear and reset input rating and bangs
    * @param object $e - the input dom event
   **/
-  clearAndReset = (e) => {
+  clearAndReset (e) {
     // clear input field
     e.target.add.value = '';
     // reset rating
@@ -40,7 +48,11 @@ class AddTodo extends Component {
     this.loopThroughBangs(1, 'remove', 5);
   }
 
-  handleRating = (rating) => {
+/**
+ * @desc function to set the rating
+ * @param number $rating - the rating value (1-5)
+**/
+  handleRating (rating) {
     if (rating > 0 && rating === this.state.rating) {
       // clear .rated class from all bangs
       this.loopThroughBangs(1, 'remove', 5);
@@ -56,7 +68,7 @@ class AddTodo extends Component {
     }
   }
 
-  loopThroughBangs = (initValue, condition, conditionValue) => {
+  loopThroughBangs (initValue, condition, conditionValue) {
     if (condition === 'remove') {
       for (let i = initValue; i <= conditionValue; i++) {
         const bang = document.getElementById(`rating-${i}`);
@@ -74,8 +86,13 @@ class AddTodo extends Component {
     return (
       <div id="add-todo">
         <form onSubmit={this.handleAddTodo} id="add-todo-form">
-          <input onKeyPress={this.onKeyPress}
-            type="text" name="add" placeholder="add todo" />
+          <input
+            type="text"
+            name="add"
+            placeholder="add todo"
+            value={this.state.task}
+            onChange={this.handleChange}
+          />
           <Rating handleRating={this.handleRating} />
           <button>Add</button>
         </form>
