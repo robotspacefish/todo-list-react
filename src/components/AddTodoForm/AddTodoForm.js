@@ -1,37 +1,39 @@
 import React, { Component } from 'react';
-import './AddTodo.css';
+import './AddTodoForm.css';
 import Rating from '../Rating/Rating';
 
-class AddTodo extends Component {
+class AddTodoForm extends Component {
   constructor (props) {
     super (props);
     this.state = {
       error : undefined,
-      rating : 0
+      rating : 0,
     }
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleRating = this.handleRating.bind(this);
   }
 
   /**
-   * @desc function to pass input value to handleAddTodo
+   * @desc function to pass input value to addTodo
    * @param string $e - the input value
   **/
-  onAdd = (e) => {
+  handleAddTodo (e) {
     e.preventDefault();
 
     const input = e.target.add.value.trim();
     let error = null;
 
     // add todo and return error if todo was invalid
-    error = this.props.handleAddTodo(input, this.state.rating);
+    error = this.props.addTodo(input, this.state.rating);
     this.setState({ error });
     this.clearAndReset(e);
   }
 
   /**
-   * @desc function to clear and reset inputm rating, and bangs
+   * @desc function to clear and reset input rating and bangs
    * @param object $e - the input dom event
   **/
-  clearAndReset = (e) => {
+  clearAndReset (e) {
     // clear input field
     e.target.add.value = '';
     // reset rating
@@ -40,7 +42,11 @@ class AddTodo extends Component {
     this.loopThroughBangs(1, 'remove', 5);
   }
 
-  handleRating = (rating) => {
+/**
+ * @desc function to set the rating
+ * @param number $rating - the rating value (1-5)
+**/
+  handleRating (rating) {
     if (rating > 0 && rating === this.state.rating) {
       // clear .rated class from all bangs
       this.loopThroughBangs(1, 'remove', 5);
@@ -56,7 +62,7 @@ class AddTodo extends Component {
     }
   }
 
-  loopThroughBangs = (initValue, condition, conditionValue) => {
+  loopThroughBangs (initValue, condition, conditionValue) {
     if (condition === 'remove') {
       for (let i = initValue; i <= conditionValue; i++) {
         const bang = document.getElementById(`rating-${i}`);
@@ -73,9 +79,12 @@ class AddTodo extends Component {
   render() {
     return (
       <div id="add-todo">
-        <form onSubmit={this.onAdd} id="add-todo-form">
-          <input onKeyPress={this.onKeyPress}
-            type="text" name="add" placeholder="add todo" />
+        <form onSubmit={this.handleAddTodo} id="add-todo-form">
+          <input
+            type="text"
+            name="add"
+            placeholder="add todo"
+          />
           <Rating handleRating={this.handleRating} />
           <button>Add</button>
         </form>
@@ -86,4 +95,4 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo;
+export default AddTodoForm;

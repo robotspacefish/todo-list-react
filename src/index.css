@@ -9,7 +9,7 @@ body {
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6f42c1+0,6610f2+100 */
   background: rgb(111,66,193); /* Old browsers */

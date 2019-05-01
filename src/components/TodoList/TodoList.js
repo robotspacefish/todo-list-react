@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from '../Todo/Todo';
 import './TodoList.css';
 
-const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodoToggle, listType }) => {
+const TodoList = ({ todos, completedTodos, deleteTodo, updateTodo, toggleTodo, listType }) => {
 
   /**
    * @desc function to sort the active todos by their urgency rating
@@ -19,13 +19,14 @@ const TodoList = ({ todos, completedTodos, handleDeleteTodo, handleCompletedTodo
       {
         list.length>0 ? list.map(todo =>
           <Todo todo={todo}
-            handleDeleteTodo={handleDeleteTodo}
-            handleCompletedTodoToggle={handleCompletedTodoToggle}
+            deleteTodo={deleteTodo}
+            toggleTodo={toggleTodo}
+            updateTodo={updateTodo}
             listType={listType}
             key={todo.todo}
           />
         ) :
-          listType === 'active' ? <p>You have no todos</p> : null
+          listType === 'active' ? <p className="TodoList-msg">You have no todos</p> : null
       }
     </div>
   );
