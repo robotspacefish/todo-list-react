@@ -19,7 +19,8 @@ export default class Todo extends Component {
 
         <p className="todo-txt">{this.props.todo.todo}</p>
         <span className="urgency-rating">{displayRating(this.props.todo.rating)}</span>
-        <button className="delete-todo-btn" onClick={this.handleDeleteTodo}>Delete</button>
+        <button className="edit-todo-btn"><i class="fas fa-pencil-alt"></i></button>
+        <button className="delete-todo-btn" onClick={this.handleDeleteTodo}><i class="far fa-trash-alt"></i></button>
       </div>
     )
   }
