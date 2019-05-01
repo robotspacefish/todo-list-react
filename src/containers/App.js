@@ -46,21 +46,24 @@ class App extends Component {
     if (error !== undefined) {
       return error;
     }
-    this.addTodoToList('active', this.setTodoParams(input, rating) )
+
+    this.setState(prevState => (
+      { active: [...prevState.active, this.setTodoParams(input, rating)] }
+    ))
   }
 
+  /**
+  * @desc function to set up the todo's input, rating, completion status, and key
+  *    already exist in active or completed todos
+  * @param string $input - the todo text entered
+  * @param number $rating - the todo rating from 1-5
+  **/
   setTodoParams = (input, rating) => ({
     todo: input,
     rating: rating,
     isCompleted: false,
     key: this.createKey(input)
   });
-
-  addTodoToList(listType, todo) {
-    this.setState(prevState => (
-      { [listType]: [...prevState[listType], todo] }
-    ))
-  }
 
   /**
   * @desc function to make sure some input was entered and it doesn't
@@ -72,7 +75,8 @@ class App extends Component {
       return 'Todo cannot be blank';
     } else if (this.state.active.filter(todo => todo.todo.toLowerCase() === input.toLowerCase()).length > 0) {
       return 'This todo already exists';
-    } else if (this.state.completed.filter(todo => todo.todo.toLowerCase() === input.toLowerCase()).length > 0 ) {
+    }
+    else if (this.state.completed.filter(todo => todo.todo.toLowerCase() === input.toLowerCase()).length > 0 ) {
       return 'This todo already exists as Completed. Uncheck it to move it up to your Active todos, or delete it and recreate it.';
     }
   };
@@ -105,8 +109,11 @@ class App extends Component {
     let listToRemoveFrom = todo.isCompleted ? 'active' : 'completed';
     let listToAddTo = todo.isCompleted ? 'completed' : 'active';
 
-    this.addTodoToList(listToAddTo, todo );
-    this.setState({ [listToRemoveFrom]: this.state[listToRemoveFrom].filter(t => t !== todo) });
+    this.setState(prevState => (
+      { [listToAddTo] : [...prevState[listToAddTo], todo],
+        [listToRemoveFrom] : this.state[listToRemoveFrom].filter(t => t !== todo)
+      }
+    ));
   };
 
   toggleCompletedStatus = (todo) => todo.isCompleted = !todo.isCompleted;
