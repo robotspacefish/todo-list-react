@@ -4,23 +4,28 @@ import './Todo.css';
 export default class Todo extends Component {
   constructor(props) {
     super(props);
-    this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  handleDeleteTodo = () => {
+  handleDelete () {
     this.props.deleteTodo(this.props.todo, this.props.listType)
+  }
+
+  handleToggle () {
+    this.props.toggleTodo(this.props.todo)
   }
 
   render() {
     const displayRating = (times) => '! '.repeat(times);
     return (
       <div className="todo">
-        <input onClick={() => this.props.handleCompletedTodoToggle(this.props.todo)} type="checkbox" className="completed-btn" name="complete" defaultChecked={this.props.listType === 'completed'} />
+        <input onClick={this.handleToggle} type="checkbox" className="completed-btn" name="complete" defaultChecked={this.props.listType === 'completed'} />
 
         <p className="todo-txt">{this.props.todo.todo}</p>
         <span className="urgency-rating">{displayRating(this.props.todo.rating)}</span>
         <button className="edit-todo-btn"><i className="fas fa-pencil-alt"></i></button>
-        <button className="delete-todo-btn" onClick={this.handleDeleteTodo}><i className="far fa-trash-alt"></i></button>
+        <button className="delete-todo-btn" onClick={this.handleDelete}><i className="far fa-trash-alt"></i></button>
       </div>
     )
   }

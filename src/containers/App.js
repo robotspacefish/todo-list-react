@@ -45,7 +45,6 @@ class App extends Component {
     if (error !== undefined) {
       return error;
     }
-    // this.addTodoToActiveState(this.setTodoParams(input, rating));
     this.addTodoToList('active', this.setTodoParams(input, rating) )
   }
 
@@ -102,7 +101,7 @@ class App extends Component {
    * @params string $completedTodo - the todo to move to the completed array
    *         string $listType - if the type of list to push to is 'completed' or 'active'
   **/
-  handleCompletedTodoToggle = (todo) => {
+  toggleTodo = (todo) => {
     this.toggleCompletedStatus(todo);
 
     let listToRemoveFrom = todo.isCompleted ? 'active' : 'completed';
@@ -131,7 +130,7 @@ class App extends Component {
           <TodoList
             todos={this.state.active}
             // handleDeleteTodo={this.handleDeleteTodo}
-            handleCompletedTodoToggle={this.handleCompletedTodoToggle}
+            toggleTodo={this.toggleTodo}
             deleteTodo={this.deleteTodo}
             listType="active"
           />
@@ -145,9 +144,8 @@ class App extends Component {
 
           <TodoList
             completedTodos={this.state.completed}
-            // handleDeleteTodo={this.handleDeleteTodo}
             deleteTodo={this.deleteTodo}
-            handleCompletedTodoToggle={this.handleCompletedTodoToggle}
+            toggleTodo={this.toggleTodo}
             listType="completed"
           />
         </div>
