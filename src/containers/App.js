@@ -140,28 +140,30 @@ class App extends Component {
 
         <AddTodo addTodo={this.addTodo} />
 
-        <TodoList
-          todos={this.state.active}
-          // handleDeleteTodo={this.handleDeleteTodo}
-          handleCompletedTodoToggle={this.handleCompletedTodoToggle}
-          deleteTodo = {this.deleteTodo}
-          listType="active"
-        />
+        <div className="App-lists">
+          <TodoList
+            todos={this.state.active}
+            // handleDeleteTodo={this.handleDeleteTodo}
+            handleCompletedTodoToggle={this.handleCompletedTodoToggle}
+            deleteTodo={this.deleteTodo}
+            listType="active"
+          />
 
-        {
-          this.state.completed.length > 0 &&
+          {
+            this.state.completed.length > 0 &&
             <button id="delete-all-completed"
               onClick={this.handleDeleteAllCompleted}>Delete All Completed
             </button>
-        }
+          }
 
-        <TodoList
-          completedTodos={this.state.completed}
-          // handleDeleteTodo={this.handleDeleteTodo}
-          deleteTodo={this.deleteTodo}
-          handleCompletedTodoToggle={this.handleCompletedTodoToggle}
-          listType="completed"
-        />
+          <TodoList
+            completedTodos={this.state.completed}
+            // handleDeleteTodo={this.handleDeleteTodo}
+            deleteTodo={this.deleteTodo}
+            handleCompletedTodoToggle={this.handleCompletedTodoToggle}
+            listType="completed"
+          />
+        </div>
 
         <footer>
           <p>This app uses local storage to save your todos in your browser</p>

@@ -25,7 +25,7 @@ const TodoList = ({ todos, completedTodos, deleteTodo, handleCompletedTodoToggle
             key={todo.todo}
           />
         ) :
-          listType === 'active' ? <p>You have no todos</p> : null
+          listType === 'active' ? <p className="TodoList-msg">You have no todos</p> : null
       }
     </div>
   );
