@@ -25,7 +25,7 @@ export default class Todo extends Component {
   handleEdit (e) {
     e.preventDefault();
     this.setState({ isEditing : false });
-    this.props.updateTodo(this.props.key, this.state.task, this.props.listType);
+    this.props.updateTodo(this.props.todo.id, this.state.task, this.props.listType);
   }
 
   toggleEditForm (e) {
