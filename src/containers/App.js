@@ -10,6 +10,7 @@ class App extends Component {
       active : [],
       completed : []
     };
+    this.handleDeleteAllCompleted = this.handleDeleteAllCompleted.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ class App extends Component {
    * @params string $input - the todo text entered
    *         int $rating - the urgency rating of the todo
   **/
-  addTodo = (input, rating) => {
+  addTodoFromForm = (input, rating) => {
     const error = this.checkForInvalidInput(input);
     if (error !== undefined) {
       return error;
@@ -49,11 +50,17 @@ class App extends Component {
   }
 
   setTodoParams = (input, rating) => ({
-      todo : input,
-      rating : rating,
-      isCompleted : false,
-      key : this.createKey(input)
-    });
+    todo: input,
+    rating: rating,
+    isCompleted: false,
+    key: this.createKey(input)
+  });
+
+  addTodoToList(listType, todo) {
+    this.setState(prevState => (
+      { [listType]: [...prevState[listType], todo] }
+    ))
+  }
 
   /**
   * @desc function to make sure some input was entered and it doesn't
@@ -70,22 +77,11 @@ class App extends Component {
     }
   };
 
-  addTodoToList(listType, todo) {
-    this.setState(prevState => (
-      { [listType]: [...prevState[listType], todo] }
-    ))
-  }
-
-  createKey = input => input.toLowerCase().split(' ').join('_');
-
   /**
-   * @desc function to remove a todo from the array provided
-   * @param string $todoToDelete - the todo to remove
-   * @param array $list - the list to remove the todo from
+   * @desc function to create a key based on todo text
+   * @param string $input - the todo to create a key from
   **/
-  filterTodoFromList = (todoToDelete, list) => (
-    list.filter(todo => todo !== todoToDelete)
-  );
+  createKey = input => input.toLowerCase().split(' ').join('_');
 
   /**
    * @desc function to set the list and remove todo
@@ -93,7 +89,9 @@ class App extends Component {
    * @param string listType - 'active' or 'completed'
   **/
   deleteTodo = (todoToDelete, listType) => {
-    this.setState({ [listType]: this.filterTodoFromList(todoToDelete, this.state[listType])  });
+    this.setState({ [listType]: this.state[listType].filter(todo => {
+      return todo !== todoToDelete;
+    })  });
   }
 
   /**
@@ -108,7 +106,7 @@ class App extends Component {
     let listToAddTo = todo.isCompleted ? 'completed' : 'active';
 
     this.addTodoToList(listToAddTo, todo );
-    this.setState({ [listToRemoveFrom]: this.filterTodoFromList(todo, this.state[listToRemoveFrom]) });
+    this.setState({ [listToRemoveFrom]: this.state[listToRemoveFrom].filter(t => t !== todo) });
   };
 
   toggleCompletedStatus = (todo) => todo.isCompleted = !todo.isCompleted;
@@ -116,7 +114,9 @@ class App extends Component {
   /**
    * @desc function to delete all completed todos from completedTodos array
   **/
-  handleDeleteAllCompleted = () => this.setState( { completed : [] });
+  handleDeleteAllCompleted () {
+    this.setState({ completed: [] });
+  }
 
   render() {
     const totalActive = this.state.active ? this.state.active.length : 0;
@@ -124,7 +124,7 @@ class App extends Component {
       <div className="App">
         <p id="active-remaining-todos">Things To Do: <span>{totalActive}</span></p>
 
-        <AddTodo addTodo={this.addTodo} />
+        <AddTodo addTodo={this.addTodoFromForm} />
 
         <div className="App-lists">
           <TodoList
