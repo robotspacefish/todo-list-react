@@ -27,14 +27,15 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // update active state if different
-    if (prevState.active.length !== this.state.active.length) {
+    // Todo some other way to check for differences in content
+    // // update active state if different
+    // if (prevState.active.length !== this.state.active.length) {
       localStorage.setItem('active', JSON.stringify(this.state.active));
-    }
-    // update completed state if different
-    if (prevState.completed.length !== this.state.completed.length) {
+    // }
+    // // update completed state if different
+    // if (prevState.completed.length !== this.state.completed.length) {
       localStorage.setItem('completed', JSON.stringify(this.state.completed));
-    }
+    // }
   }
 
   /**
