@@ -11,6 +11,7 @@ class App extends Component {
       completed : []
     };
     this.handleDeleteAllCompleted = this.handleDeleteAllCompleted.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +54,23 @@ class App extends Component {
   }
 
   /**
+   * @desc function to update/edit a todo
+   * @param string $id - the todo id
+   * @param string $updatedTodo - the new task to replace the old todo with
+   * @param string $listType - the list that contains the todo (active or completed)
+  **/
+  updateTodo (id, updatedTodo, listType) {
+    const updatedList = this.state[listType].map(task => {
+      if (id === task.id) {
+        return {...task, todo : updatedTodo, key : this.createKey(updatedTodo)};
+      }
+      return task;
+    });
+
+    this.setState({ [listType] : updatedList });
+  }
+
+  /**
   * @desc function to set up the todo's input, rating, completion status, and key
   *    already exist in active or completed todos
   * @param string $input - the todo text entered
@@ -62,7 +80,7 @@ class App extends Component {
     todo: input,
     rating: rating,
     isCompleted: false,
-    key: this.createKey(input)
+    id: this.createKey(input)
   });
 
   /**
@@ -104,7 +122,7 @@ class App extends Component {
    * @param string $listType - if the type of list to push to is 'completed' or 'active'
   **/
   toggleTodo = (todo) => {
-    this.toggleCompletedStatus(todo);
+    todo.isCompleted = !todo.isCompleted;
 
     let listToRemoveFrom = todo.isCompleted ? 'active' : 'completed';
     let listToAddTo = todo.isCompleted ? 'completed' : 'active';
@@ -115,8 +133,6 @@ class App extends Component {
       }
     ));
   };
-
-  toggleCompletedStatus = (todo) => todo.isCompleted = !todo.isCompleted;
 
   /**
    * @desc function to delete all completed todos from completedTodos array
@@ -139,6 +155,7 @@ class App extends Component {
             // handleDeleteTodo={this.handleDeleteTodo}
             toggleTodo={this.toggleTodo}
             deleteTodo={this.deleteTodo}
+            updateTodo={this.updateTodo}
             listType="active"
           />
 
@@ -153,6 +170,7 @@ class App extends Component {
             completedTodos={this.state.completed}
             deleteTodo={this.deleteTodo}
             toggleTodo={this.toggleTodo}
+            updateTodo={this.updateTodo}
             listType="completed"
           />
         </div>

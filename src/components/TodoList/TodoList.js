@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from '../Todo/Todo';
 import './TodoList.css';
 
-const TodoList = ({ todos, completedTodos, deleteTodo, toggleTodo, listType }) => {
+const TodoList = ({ todos, completedTodos, deleteTodo, updateTodo, toggleTodo, listType }) => {
 
   /**
    * @desc function to sort the active todos by their urgency rating
@@ -21,6 +21,7 @@ const TodoList = ({ todos, completedTodos, deleteTodo, toggleTodo, listType }) =
           <Todo todo={todo}
             deleteTodo={deleteTodo}
             toggleTodo={toggleTodo}
+            updateTodo={updateTodo}
             listType={listType}
             key={todo.todo}
           />
