@@ -8,10 +8,8 @@ class AddTodoForm extends Component {
     this.state = {
       error : undefined,
       rating : 0,
-      task : ''
     }
     this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleRating = this.handleRating.bind(this);
   }
 
@@ -29,10 +27,6 @@ class AddTodoForm extends Component {
     error = this.props.addTodo(input, this.state.rating);
     this.setState({ error });
     this.clearAndReset(e);
-  }
-
-  handleChange(e) {
-    this.setState({ task: e.target.value });
   }
 
   /**
@@ -90,8 +84,6 @@ class AddTodoForm extends Component {
             type="text"
             name="add"
             placeholder="add todo"
-            value={this.state.task}
-            onChange={this.handleChange}
           />
           <Rating handleRating={this.handleRating} />
           <button>Add</button>
