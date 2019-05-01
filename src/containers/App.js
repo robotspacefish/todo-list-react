@@ -87,11 +87,11 @@ class App extends Component {
   );
 
   /**
-   * @desc function to handle setting the list and todo to remove
+   * @desc function to set the list and remove todo
    * @param string $todoToDelete - the todo to remove
    * @param string listType - 'active' or 'completed'
   **/
-  handleDeleteTodo = (todoToDelete, listType) => {
+  deleteTodo = (todoToDelete, listType) => {
     const newListArray = this.filterTodoFromList(todoToDelete, this.state[listType]);
 
     listType === 'active'
@@ -142,8 +142,9 @@ class App extends Component {
 
         <TodoList
           todos={this.state.active}
-          handleDeleteTodo={this.handleDeleteTodo}
+          // handleDeleteTodo={this.handleDeleteTodo}
           handleCompletedTodoToggle={this.handleCompletedTodoToggle}
+          deleteTodo = {this.deleteTodo}
           listType="active"
         />
 
@@ -156,7 +157,8 @@ class App extends Component {
 
         <TodoList
           completedTodos={this.state.completed}
-          handleDeleteTodo={this.handleDeleteTodo}
+          // handleDeleteTodo={this.handleDeleteTodo}
+          deleteTodo={this.deleteTodo}
           handleCompletedTodoToggle={this.handleCompletedTodoToggle}
           listType="completed"
         />
