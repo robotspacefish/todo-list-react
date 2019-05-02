@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import './Todo.css';
+import Rating from '../Rating/Rating';
 
 export default class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task : this.props.todo.todo
+      isEditing : false,
+      task : this.props.todo.todo,
+      rating : this.props.todo.rating
+
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -25,7 +29,7 @@ export default class Todo extends Component {
   handleEdit (e) {
     e.preventDefault();
     this.setState({ isEditing : false });
-    this.props.updateTodo(this.props.todo.id, this.state.task, this.props.listType);
+    this.props.updateTodo(this.props.todo.id, this.state.task, this.props.listType, this.state.rating);
   }
 
   toggleEditForm (e) {
@@ -54,6 +58,7 @@ export default class Todo extends Component {
                 type="text"
                 value={this.state.task}
                 onChange={this.handleChange} />
+                {/* <Rating handleRating={this.handleRating} /> */}
               <button>Save</button>
             </form>
             : <p className="todo-txt">{this.state.task}</p>

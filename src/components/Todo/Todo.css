@@ -56,6 +56,10 @@
   padding: 9px 10px;
 }
 
+.todo .urgency-rating {
+  cursor: default;
+}
+
 /* @keyframes slide-in {
  from {
    width: 0;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './AddTodoForm.css';
 import Rating from '../Rating/Rating';
+import { addRemoveClassesLoop } from '../../helpers';
 
 class AddTodoForm extends Component {
   constructor (props) {
@@ -10,7 +11,7 @@ class AddTodoForm extends Component {
       rating : 0,
     }
     this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleRating = this.handleRating.bind(this);
+    this.addRating = this.addRating.bind(this);
   }
 
   /**
@@ -29,6 +30,10 @@ class AddTodoForm extends Component {
     this.clearAndReset(e);
   }
 
+  addRating(rating) {
+    this.setState({ rating })
+  }
+
   /**
    * @desc function to clear and reset input rating and bangs
    * @param object $e - the input dom event
@@ -38,42 +43,10 @@ class AddTodoForm extends Component {
     e.target.add.value = '';
     // reset rating
     this.setState({ rating: 0 });
+
     // clear .rated class from all bangs
-    this.loopThroughBangs(1, 'remove', 5);
-  }
+    addRemoveClassesLoop(1, 'remove', 5, 'rating-', 'rated');
 
-/**
- * @desc function to set the rating
- * @param number $rating - the rating value (1-5)
-**/
-  handleRating (rating) {
-    if (rating > 0 && rating === this.state.rating) {
-      // clear .rated class from all bangs
-      this.loopThroughBangs(1, 'remove', 5);
-      this.setState({ rating : 0 });
-    } else {
-      //set rating in state
-      this.setState({ rating });
-
-      // add .rated class to bangs <= rating
-      this.loopThroughBangs(rating, 'add', 1);
-      // clear .rated class from bangs >= rating
-      this.loopThroughBangs(rating+1, 'remove', 5);
-    }
-  }
-
-  loopThroughBangs (initValue, condition, conditionValue) {
-    if (condition === 'remove') {
-      for (let i = initValue; i <= conditionValue; i++) {
-        const bang = document.getElementById(`rating-${i}`);
-        bang.classList.remove('rated');
-      }
-    } else { // remove
-      for (let i = initValue; i >= conditionValue; i--) {
-        const bang = document.getElementById(`rating-${i}`);
-        bang.classList.add('rated');
-      }
-    }
   }
 
   render() {
@@ -85,7 +58,7 @@ class AddTodoForm extends Component {
             name="add"
             placeholder="add todo"
           />
-          <Rating handleRating={this.handleRating} />
+          <Rating addRating={this.addRating} />
           <button>Add</button>
         </form>
 
