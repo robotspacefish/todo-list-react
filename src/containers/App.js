@@ -60,11 +60,11 @@ class App extends Component {
    * @param string $updatedTodo - the new task to replace the old todo with
    * @param string $listType - the list that contains the todo (active or completed)
   **/
-  updateTodo (id, updatedTodo, listType) {
+  updateTodo (id, updatedTodo, listType, rating) {
 
     const updatedList = this.state[listType].map(task => {
       if (id === task.id) {
-        return {...task, todo : updatedTodo, id : this.createKey(updatedTodo)};
+        return {...task, todo : updatedTodo, rating : rating, id : this.createKey(updatedTodo)};
       }
       return task;
     });
